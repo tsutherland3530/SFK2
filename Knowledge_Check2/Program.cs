@@ -1,32 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YourNamespace
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        Console.WriteLine("How many plants do you want to add?");
+        int numberOfPlants = int.Parse(Console.ReadLine());
+
+        var plants = new List<Plant>();
+        for (int i = 0; i < numberOfPlants; i++)
         {
-            Console.WriteLine("How many records do you want to add? ");
-            var numberOfRecords = int.Parse(Console.ReadLine());
+            Console.WriteLine("Type of plant (Tree/Flower):");
+            string type = Console.ReadLine();
 
-            var recordList = new List<CatFood>();
-            for (int i = 0; i < numberOfRecords; i++)
+            if (type.ToLower() == "tree")
             {
-                var catFood = new CatFood();
+                Tree tree = new Tree();
+                Console.WriteLine("Enter the Name of the Tree:");
+                tree.Name = Console.ReadLine();
+                Console.WriteLine("Enter the Watering Schedule for the Tree:");
+                tree.WaterSchedule = Console.ReadLine();
+                Console.WriteLine("Enter the Height of the Tree (in meters):");
+                tree.TreeHeight = double.Parse(Console.ReadLine());
 
-                Console.WriteLine("Enter the Name: ");
-                catFood.Name = Console.ReadLine();
+                tree.PlantType = "Tree";
+                plants.Add(tree);
+            }
+            else if (type.ToLower() == "flower")
+            {
+                Flower flower = new Flower();
+                Console.WriteLine("Enter the Name of the Flower:");
+                flower.Name = Console.ReadLine();
+                Console.WriteLine("Enter the Watering Schedule for the Flower:");
+                flower.WaterSchedule = Console.ReadLine();
+                Console.WriteLine("Enter the Color of the Flower:");
+                flower.Color = Console.ReadLine();
+                Console.WriteLine("Is the Flower Perennial? (true/false):");
+                flower.IsPerennial = bool.Parse(Console.ReadLine());
 
-                Console.WriteLine("Enter the Price: ");
-                catFood.Price = decimal.Parse(Console.ReadLine());
+                flower.PlantType = "Flower";
+                plants.Add(flower);
+            }
+        }
 
-                Console.WriteLine("Enter the Quantity: ");
-                catFood.Quantity = int.Parse(Console.ReadLine());
-
-                Console.WriteLine("Enter the Description: ");
-                catFood.Description = Console.ReadLine();
-
-                Console.WriteLine("Is this food for kittens? (true/false): ");
-                catFood
+        // Print out the list of plants
+        foreach (var plant in plants)
+        {
+            Console.WriteLine(plant);
+        }
+    }
 }
